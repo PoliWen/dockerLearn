@@ -1,0 +1,25 @@
+# Dependencies
+node_modules
+.pnpm-store
+
+# Build
+dist
+.nitro
+.output
+
+# Environment
+.env
+.env.*
+
+# IDE
+.vscode
+.idea
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# System
+.DS_Store
+Thumbs.db 

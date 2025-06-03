@@ -1,0 +1,18 @@
+{
+  "name": "todo-backend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Todo App Backend",
+  "scripts": {
+    "build": "npm run generate-prisma && nitro build",
+     "dev": "npx prisma migrate dev --name init --schema=./app/prisma/schema.prisma && npm run generate-prisma && nitro dev --host",
+    "generate-prisma": "prisma generate --schema=./app/prisma/schema.prisma"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.6.0",
+    "prisma": "^6.6.0"
+  },
+  "devDependencies": {
+    "nitropack": "^2.11.6"
+  }
+}

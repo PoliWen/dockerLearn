@@ -1,0 +1,13 @@
+{
+  "name": "hello-docker",
+  "version": "1.0.0",
+  "description": "Simple Express app for Docker demo",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+} 

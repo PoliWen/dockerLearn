@@ -1,0 +1,20 @@
+{
+  "name": "docker-todo-demo",
+  "private": true,
+  "packageManager": "pnpm@10.5.1",
+  "description": "Docker Todo Demo",
+  "scripts": {
+    "dev:app": "pnpm -C packages/app run dev",
+    "dev:server": "pnpm -C packages/server run dev",
+    "dev": "pnpm run dev:server & pnpm run dev:app",
+    "build:app": "pnpm -C packages/app run build",
+    "build:server": "pnpm -C packages/server run build",
+    "build": "pnpm run build:server && pnpm run build:app"
+  },
+  "dependencies": {
+    "typescript": "^5.7.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.3.0"
+  }
+}

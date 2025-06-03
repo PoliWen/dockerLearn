@@ -1,0 +1,24 @@
+# Logs
+*.log
+
+# Dependencies
+node_modules
+
+# Build outputs
+dist
+*.local
+
+# Editor directories and files
+.idea
+.vscode
+
+# Auto generated files
+auto-imports.d.ts
+components.d.ts
+unimport.d.ts
+
+# Nitro
+.nitro
+
+# macOS 操作系統下的一個隱藏文件，它是由 Finder（macOS 的文件管理器）自動生成的
+.DS_Store
