@@ -1,6 +1,6 @@
 <template>
   <div class="todo-app">
-    <h1>Todo 应用111</h1>
+    <h1>Todo 应用</h1>
     
     <div class="add-todo">
       <n-input v-model:value="newTodo" placeholder="输入新任务..." @keyup.enter="addTodo" />

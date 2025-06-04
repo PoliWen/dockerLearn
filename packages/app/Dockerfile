@@ -11,5 +11,4 @@ COPY . .
 
 EXPOSE 5173
 
-# 添加--host参数使得容器外可访问
 CMD ["pnpm", "run", "dev", "--host"] 

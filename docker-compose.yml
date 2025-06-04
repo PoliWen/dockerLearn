@@ -1,41 +1,10 @@
 version: '3'
 
 services:
-  # 前端服务
-  frontend:
-    build: ./packages/app
-    ports:
-      - "5173:5173"
-    volumes:
-      - ./packages/app:/app
-      - /app/node_modules
-    depends_on:
-      - backend
-    command: ["pnpm", "run", "dev", "--host"]
-
-  # 后端服务
-  backend:
-    build: ./packages/server
-    ports:
-      - "3001:3001"
-    environment:
-      - DATABASE_URL=mysql://root:root@db:3306/todolist
-    volumes:
-      - ./packages/server:/app
-      - /app/node_modules
-    depends_on:
-      db:
-        condition: service_healthy
-    command: >
-      sh -c "
-        npm run generate-prisma &&
-        npx prisma db push --schema=./app/prisma/schema.prisma &&
-        npm run dev
-      "
-
   # 数据库服务
   db:
     image: mysql:8
+    container_name: todolist-db
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: todolist
@@ -48,6 +17,44 @@ services:
       interval: 5s
       timeout: 5s
       retries: 20
+
+  # 后端服务
+  server:
+    image: todolist-server
+    build: 
+      context: ./packages/server
+    container_name: todolist-server
+    ports:
+      - "3001:3001"
+    environment:
+      - DATABASE_URL=mysql://root:root@db:3306/todolist
+    volumes:
+      - ./packages/server:/app
+      - /app/node_modules
+    depends_on:
+      db:
+        condition: service_healthy
+    command: >
+      sh -c "
+        pnpm run generate-prisma &&
+        npx prisma db push --schema=./app/prisma/schema.prisma &&
+        npx nitro dev --host --port 3001
+      "
+
+  # 前端服务
+  app:
+    image: todolist-app
+    build:
+      context: ./packages/app
+    container_name: todolist-app
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./packages/app:/app
+      - /app/node_modules
+    depends_on:
+      - server
+    command: ["pnpm", "run", "dev", "--host"]
 
 volumes:
   db-data:
